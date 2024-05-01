@@ -1,0 +1,39 @@
+資料庫欄位規劃
+users
+    pdb_user_id
+    email
+    name
+networks
+    pdb_user_id
+    pdb_network_id
+    asn
+    name
+sessions
+    pdb_user_id
+    router
+    pdb_ix_id
+    asn
+    ip
+    status
+        - pending
+        - configured
+ix
+    pdb_ix_id
+    name
+    router_id
+    ix_lan_v4
+    ix_lan_v6
+    speed
+prefixes
+    pdb_user_id
+    prefix
+    status
+        - pending
+        - accepted
+routers
+    id
+    name
+    location
+    ip
+    port
+    key

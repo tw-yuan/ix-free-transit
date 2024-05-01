@@ -1,0 +1,33 @@
+頁面、功能規劃
+User
+    - Home
+    - Session
+        - Create
+        - List
+        - Delete
+    - Network
+        - List
+    - Prefix
+        - List
+        - Add
+        - Delete
+Admin
+    - Statics
+    - User
+        - List
+        - Delete
+    - Network
+        - List
+        - Delete
+    - Prefix
+        - List
+        - Add
+        - Delete
+    - Session
+        - List
+        - Create
+        - Delete
+    - Router
+        - List
+        - Add
+        - Delete

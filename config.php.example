@@ -1,0 +1,16 @@
+<?php
+$Peeringdb_OAUTH2_CLIENT_ID = 'peeringdb-client-id';
+$Peeringdb_OAUTH2_CLIENT_SECRET = 'peeringdb-client-secret';
+$databases_host = 'databases_host';
+$databases_name = 'databases_name';
+$databases_user = 'databases_user';
+$databases_password = 'databases_password';
+$REDIRECT_URI = 'http://localhost/peeringdb-oauth2/callback.php';
+$mongo_link = "mongodb://" . $databases_user . ":" . $databases_password . "@" . $databases_host . ":27017/?authSource=" . $databases_name;
+$system_as = 'as_number';
+$mail_smtp_server = 'mail_smtp_server';
+$mail_smtp_username = 'mail_smtp_username';
+$mail_smtp_password = 'mail_smtp_password';
+$mail_from = 'mail_from';
+$mail_display_name = 'mail_display_name';
+$mail_cc_address = 'mail_cc_address';
