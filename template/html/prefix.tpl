@@ -22,8 +22,7 @@
           <div class="card-body">
             <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
               <h5 class="card-title fw-semibold mb-4">Prefix(es) List</h5>
-              <p class="mb-3"> All prefix(es) must provide LOA and matching IRR record.<br>If you need Vultr (AS20473)
-                transit, please contact us and sign RPKI for AS204844.
+              <p class="mb-3"> Prefix(es) will be updated with AS-SET by daily cron.<br>If you need Vultr (AS20473) transit or add customized route, please contact us and sign RPKI for AS204844.
               </p>
               <a href="?action=new"><button type="button" class="btn btn-dark m-3">Add New</button></a>
               <a href="https://jodies.de/ipcalc" target="_blank"><button type="button" class="btn btn-primary m-3">IP Calculator</button></a>
