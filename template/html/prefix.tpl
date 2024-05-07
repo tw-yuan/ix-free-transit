@@ -38,6 +38,9 @@
                       <h6 class="fw-semibold mb-0">Max Length</h6>
                     </th>
                     <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Source</h6>
+                    </th>
+                    <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Status</h6>
                     </th>
                   </tr>
@@ -50,6 +53,9 @@
                       </td>
                       <td class="border-bottom-0">
                         <h6 class="fw-semibold mb-1">{$i.maxLength}</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-1">{$i.source}</h6>
                       </td>
                       <td class="border-bottom-0">
                         {if $i.status == 'accepted'}
