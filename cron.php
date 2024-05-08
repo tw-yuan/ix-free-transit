@@ -22,46 +22,48 @@ foreach ($user_info as $user) {
     $net_info = $mongoClient->executeQuery($collection, $query);
     $net_info = json_decode(json_encode($net_info->toArray()), true);
     foreach ($net_info as $net) {
-        $asn = $net['asn'];
-        $pdb_url = $peeringdb_cache . "api/net?asn=" . $asn;
-        $asn_info = getAPI($pdb_url);
-        if ($asn_info['data']['0']['irr_as_set']) {
-            $bgpq_req = $asn_info['data']['0']['irr_as_set'];
-        } else {
-            $bgpq_req = $asn;
-        }
+        if ($net['active'] != 'no') {
+            $asn = $net['asn'];
+            $pdb_url = $peeringdb_cache . "api/net?asn=" . $asn;
+            $asn_info = getAPI($pdb_url);
+            if ($asn_info['data']['0']['irr_as_set']) {
+                $bgpq_req = $asn_info['data']['0']['irr_as_set'];
+            } else {
+                $bgpq_req = $asn;
+            }
 
-        $collection = $databases_name . ".networks";
-        $doc = [
-            'as_set' => $bgpq_req
-        ];
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update(
-            ['asn' => $asn],
-            ['$set' => $doc],
-            ['multi' => true, 'upsert' => true]
-        );
-        $result = $mongoClient->executeBulkWrite($collection, $bulk);
-        echo $bgpq_req;
-        $bgpq_url = $bgpq_api . "route6?req=" . $bgpq_req;
-        $prefix_info = getAPI($bgpq_url)['NN'];
-        foreach ($prefix_info as $prefixes) {
-            $collection = $databases_name . ".prefixes";
+            $collection = $databases_name . ".networks";
             $doc = [
-                'pdb_user_id' => $id,
-                'prefix' => $prefixes['prefix'],
-                'source' => "IRR",
-                'status' => 'accepted'
+                'as_set' => $bgpq_req
             ];
             $bulk = new MongoDB\Driver\BulkWrite;
             $bulk->update(
-                ['pdb_user_id' => $id, 'prefix' => $prefixes['prefix']],
+                ['asn' => $asn],
                 ['$set' => $doc],
                 ['multi' => true, 'upsert' => true]
             );
             $result = $mongoClient->executeBulkWrite($collection, $bulk);
+            echo $bgpq_req;
+            $bgpq_url = $bgpq_api . "route6?req=" . $bgpq_req;
+            $prefix_info = getAPI($bgpq_url)['NN'];
+            foreach ($prefix_info as $prefixes) {
+                $collection = $databases_name . ".prefixes";
+                $doc = [
+                    'pdb_user_id' => $id,
+                    'prefix' => $prefixes['prefix'],
+                    'source' => "IRR",
+                    'status' => 'accepted'
+                ];
+                $bulk = new MongoDB\Driver\BulkWrite;
+                $bulk->update(
+                    ['pdb_user_id' => $id, 'prefix' => $prefixes['prefix']],
+                    ['$set' => $doc],
+                    ['multi' => true, 'upsert' => true]
+                );
+                $result = $mongoClient->executeBulkWrite($collection, $bulk);
+            }
+            echo "DONE";
         }
-        echo "DONE";
     }
 }
 # update ix information
