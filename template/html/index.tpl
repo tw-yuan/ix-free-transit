@@ -34,7 +34,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{$session_count}</h5>
                       <p class="card-text">session(s) created.</p>
-                      <a href="./session.php" class="btn btn-primary">Check Sessions</a>
+                      <a href="./session.php" class="btn btn-primary">View Sessions</a>
                     </div>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{$prefix_count}</h5>
                       <p class="card-text">Prefix(es) added.</p>
-                      <a href="./prefix.php" class="btn btn-primary">Check Prefixes</a>
+                      <a href="./prefix.php" class="btn btn-primary">View Prefixes</a>
                     </div>
                   </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{$network_count}</h5>
                       <p class="card-text">Network(s) registered.</p>
-                      <a href="./network.php" class="btn btn-primary">Check Networks</a>
+                      <a href="./network.php" class="btn btn-primary">View Networks</a>
                     </div>
                   </div>
                 </div>
