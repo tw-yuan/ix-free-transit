@@ -14,3 +14,5 @@ $mail_smtp_password = 'mail_smtp_password';
 $mail_from = 'mail_from';
 $mail_display_name = 'mail_display_name';
 $mail_cc_address = 'mail_cc_address';
+$bgpq_api = '';
+$peeringdb_cache = '';
