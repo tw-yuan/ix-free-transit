@@ -16,3 +16,4 @@ $mail_display_name = 'mail_display_name';
 $mail_cc_address = 'mail_cc_address';
 $bgpq_api = '';
 $peeringdb_cache = '';
+$RIPE_PWD = '';

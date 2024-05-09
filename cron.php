@@ -1,12 +1,16 @@
 <?php
+echo "Cron Starting!\n";
 require './config.php';
 # update prefix list
+echo "Fetching user info";
 $mongoClient = new MongoDB\Driver\Manager($mongo_link);
 $collection = $databases_name . ".users";
 $filter = [];
 $query = new MongoDB\Driver\Query($filter);
 $user_info = $mongoClient->executeQuery($collection, $query);
 $user_info = json_decode(json_encode($user_info->toArray()), true);
+echo "...DONE\nFetching prefix with AS-SET.\n";
+
 foreach ($user_info as $user) {
     $id = $user['pdb_user_id'];
     $collection = $databases_name . ".prefixes";
@@ -62,7 +66,7 @@ foreach ($user_info as $user) {
                 );
                 $result = $mongoClient->executeBulkWrite($collection, $bulk);
             }
-            echo "DONE";
+            echo "...DONE\n";
         }
     }
 }
@@ -71,7 +75,8 @@ foreach ($user_info as $user) {
 # create session
 # update routemap
 # update ripe asset object
-#require './mail.php';
+require './mail.php';
+echo "RIPE Update Mail sent.\n";
 # function
 function getAPI($url)
 {
