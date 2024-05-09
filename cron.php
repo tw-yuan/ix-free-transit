@@ -33,7 +33,7 @@ foreach ($user_info as $user) {
             if ($asn_info['data']['0']['irr_as_set']) {
                 $bgpq_req = $asn_info['data']['0']['irr_as_set'];
             } else {
-                $bgpq_req = "AS" . $asn;
+                $bgpq_req = "AS".$asn;
             }
 
             $collection = $databases_name . ".networks";
