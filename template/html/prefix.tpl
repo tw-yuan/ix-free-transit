@@ -22,9 +22,10 @@
           <div class="card-body">
             <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
               <h5 class="card-title fw-semibold mb-4">Prefix(es) List</h5>
-              <p class="mb-3"> Prefix(es) will be updated with AS-SET by daily cron.<br>If you need Vultr (AS20473) transit or add customized route, please contact us and sign RPKI for AS204844.
+              <p class="mb-2"> Prefix(es) will be updated with AS-SET by daily cron.<br>
+              If you need Vultr (AS20473) transit or add customized route, please contact us and sign RPKI for AS204844.
               </p>
-              <a href="?action=new"><button type="button" class="btn btn-dark m-3">Add New</button></a>
+              <a href="mailto:noc@ncse.tw?subject=Add%20New%20Prefixes&body=Hi%20NCSE%20Network%20NOC%20team%2C%0AWe%20would%20like%20to%20add%20prefix(es)%20to%20our%20filter%2C%20below%20are%20the%20information.%0APlease%20help%20us%20add%20to%20transit%20manager%20panel.%0A%0AUser%20ID%3A%20{$userid}%0A%0APrefix(es)%0AEx%3A%201.1.1.0%2F24%0A%0AAttachments%20are%20LOA."><button type="button" class="btn btn-dark m-3">Add Prefix</button></a>
               <a href="https://jodies.de/ipcalc" target="_blank"><button type="button" class="btn btn-primary m-3">IP Calculator</button></a>
             </div>
             <div class="table-responsive">
@@ -35,7 +36,7 @@
                       <h6 class="fw-semibold mb-0">Prefix(es)</h6>
                     </th>
                     <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Max Length</h6>
+                      <h6 class="fw-semibold mb-0">Source</h6>
                     </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Source</h6>
@@ -52,7 +53,7 @@
                         <h6 class="fw-semibold mb-1">{$i.prefix}</h6>
                       </td>
                       <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">{$i.maxLength}</h6>
+                        <h6 class="fw-semibold mb-1">{$i.source}</h6>
                       </td>
                       <td class="border-bottom-0">
                         <h6 class="fw-semibold mb-1">{$i.source}</h6>

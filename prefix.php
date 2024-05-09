@@ -19,6 +19,7 @@ if ($_SESSION['user']['name']) {
     $smarty->assign("Login_button", '<a href="./auth.php?action=logout" target="_self" class="btn btn-danger">Logout</a>');
     #below is cutomized.
     $smarty->assign("prefix_list", $prefixes);
+    $smarty->assign("userid", $_SESSION['user']['id']);
     $smarty->assign("asn", $system_as);
     $smarty->display('./template/html/prefix.tpl');
 } else {
