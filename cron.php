@@ -26,14 +26,14 @@ foreach ($user_info as $user) {
     $net_info = $mongoClient->executeQuery($collection, $query);
     $net_info = json_decode(json_encode($net_info->toArray()), true);
     foreach ($net_info as $net) {
-        if ($net['active'] != 'no') {
+        if ($net['active'] != 'no'){
             $asn = $net['asn'];
             $pdb_url = $peeringdb_cache . "api/net?asn=" . $asn;
             $asn_info = getAPI($pdb_url);
             if ($asn_info['data']['0']['irr_as_set']) {
                 $bgpq_req = $asn_info['data']['0']['irr_as_set'];
             } else {
-                $bgpq_req = $asn;
+                $bgpq_req = "AS" . $asn;
             }
 
             $collection = $databases_name . ".networks";
