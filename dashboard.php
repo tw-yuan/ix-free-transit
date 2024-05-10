@@ -13,25 +13,38 @@ $cursor = $mongoClient->executeQuery($session_collection, $query);
 $session = json_decode(json_encode($cursor->toArray()), true);
 
 #query the prefixes.
-$mongoClient = new MongoDB\Driver\Manager($mongo_link);
 $prefixes_collection = $databases_name . ".prefixes";
 $filter = ['pdb_user_id' => $_SESSION['user']['id']];
 $query = new MongoDB\Driver\Query($filter);
 $cursor = $mongoClient->executeQuery($prefixes_collection, $query);
 $prefixes = json_decode(json_encode($cursor->toArray()), true);
 
+#query the networks.
+$prefixes_collection = $databases_name . ".networks";
+$filter = ['pdb_user_id' => $_SESSION['user']['id']];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $mongoClient->executeQuery($prefixes_collection, $query);
+$networks = json_decode(json_encode($cursor->toArray()), true);
 
-if($_SESSION['user']['name']) {
+#query the users.
+$mongoClient = new MongoDB\Driver\Manager($mongo_link);
+$prefixes_collection = $databases_name . ".users";
+$filter = ['pdb_user_id' => $_SESSION['user']['id']];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $mongoClient->executeQuery($prefixes_collection, $query);
+$users = json_decode(json_encode($cursor->toArray()), true);
+
+if($_SESSION['user']['id']) {
     #below is static.
-    $text = "Welcome, " . $_SESSION['user']['name'] . "!";
+    $text = "Welcome, " . $users['0']['name'] . "!";
     $smarty->assign("username", $text);
     $smarty->assign("Login_button", '<a href="./auth.php?action=logout" target="_self" class="btn btn-danger">Logout</a>');
     #below is cutomized.
-    $smarty->assign("network_count", count($_SESSION['user']['networks']));
+    $smarty->assign("network_count", count($networks));
     $smarty->assign("prefix_count", count($prefixes));
     $smarty->assign("session_count", count($session));
-    $smarty->assign("userid", $_SESSION['user']['id']);
-    $smarty->assign("email", $_SESSION['user']['email']);
+    $smarty->assign("userid", $users['0']['pdb_user_id']);
+    $smarty->assign("email", $users['0']['email']);
 } else {
     $smarty->assign("username", "Please login first.");
     $smarty->assign("Login_button", '<a href="./auth.php?action=login" target="_self" class="btn btn-success">Login with PeeringDB</a>');

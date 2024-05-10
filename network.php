@@ -12,9 +12,16 @@ $query = new MongoDB\Driver\Query($filter);
 $networks = $mongoClient->executeQuery($collection, $query);
 $networks = json_decode(json_encode($networks->toArray()), true);
 
-if ($_SESSION['user']['name']) {
+#query the users.
+$prefixes_collection = $databases_name . ".users";
+$filter = ['pdb_user_id' => $_SESSION['user']['id']];
+$query = new MongoDB\Driver\Query($filter);
+$cursor = $mongoClient->executeQuery($prefixes_collection, $query);
+$users = json_decode(json_encode($cursor->toArray()), true);
+
+if($_SESSION['user']['id']) {
     #below is static.
-    $text = "Welcome, " . $_SESSION['user']['name'] . "!";
+    $text = "Welcome, " . $users['0']['name'] . "!";
     $smarty->assign("username", $text);
     $smarty->assign("Login_button", '<a href="./auth.php?action=logout" target="_self" class="btn btn-danger">Logout</a>');
     #below is cutomized.

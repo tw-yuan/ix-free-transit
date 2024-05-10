@@ -39,9 +39,6 @@
                       <h6 class="fw-semibold mb-0">Source</h6>
                     </th>
                     <th class="border-bottom-0">
-                      <h6 class="fw-semibold mb-0">Source</h6>
-                    </th>
-                    <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Status</h6>
                     </th>
                   </tr>
@@ -51,9 +48,6 @@
                     <tr>
                       <td class="border-bottom-0">
                         <h6 class="fw-semibold mb-1">{$i.prefix}</h6>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">{$i.source}</h6>
                       </td>
                       <td class="border-bottom-0">
                         <h6 class="fw-semibold mb-1">{$i.source}</h6>
