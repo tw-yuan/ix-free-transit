@@ -65,19 +65,44 @@ if (session('access_token')) {
     $result = $mongoClient->executeBulkWrite($collection, $bulk);
 
     foreach ($_SESSION['user']['networks'] as $value) {
+
         $collection = $databases_name . ".networks";
-        $doc = [
-            'pdb_network_id' => $value['id'],
-            'asn' => $value['asn'],
-            'name' => $value['name']
-        ];
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->update(
-            ['pdb_user_id' => $_SESSION['user']['id'], 'pdb_network_id' => $value['id']],
-            ['$set' => $doc],
-            ['multi' => true, 'upsert' => true]
-        );
-        $result = $mongoClient->executeBulkWrite($collection, $bulk);
+        $filter = ['pdb_user_id' => $_SESSION['user']['id'], 'pdb_network_id' => $value['id']];
+        $query = new MongoDB\Driver\Query($filter);
+        $net_info = $mongoClient->executeQuery($collection, $query);
+        $net_info = json_decode(json_encode($net_info->toArray()), true);
+
+        if ($net_info[0]['active'] == 'no') {
+            $collection = $databases_name . ".networks";
+            $doc = [
+                'pdb_network_id' => $value['id'],
+                'asn' => $value['asn'],
+                'name' => $value['name'],
+                'active' => 'no'
+            ];
+            $bulk = new MongoDB\Driver\BulkWrite;
+            $bulk->update(
+                ['pdb_user_id' => $_SESSION['user']['id'], 'pdb_network_id' => $value['id']],
+                ['$set' => $doc],
+                ['multi' => true, 'upsert' => true]
+            );
+            $result = $mongoClient->executeBulkWrite($collection, $bulk);
+        } else {
+            $collection = $databases_name . ".networks";
+            $doc = [
+                'pdb_network_id' => $value['id'],
+                'asn' => $value['asn'],
+                'name' => $value['name'],
+                'active' => 'yes'
+            ];
+            $bulk = new MongoDB\Driver\BulkWrite;
+            $bulk->update(
+                ['pdb_user_id' => $_SESSION['user']['id'], 'pdb_network_id' => $value['id']],
+                ['$set' => $doc],
+                ['multi' => true, 'upsert' => true]
+            );
+            $result = $mongoClient->executeBulkWrite($collection, $bulk);
+        }
     }
     //update_userinfo($mongoClient,$databases_name);
 }
@@ -137,4 +162,4 @@ function session($key, $default = NULL)
 }
 
 
-header('Location: ./');
+header('Location: ./dashboard.php');

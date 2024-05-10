@@ -21,6 +21,8 @@
         <div class="card w-100">
           <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Your Network Information</h5>
+            <p class="mb-2"> For rejected network, we won't sync the prefix(es).
+              </p>
             <!--<a href="./session.php?action=create"><button type="button"
                   class="btn btn-outline-secondary m-1">Edit AS-SET</button></a>-->
             <div class="table-responsive">
@@ -35,6 +37,9 @@
                     </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Name</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Status</h6>
                     </th>
                     <th class="border-bottom-0">
                       <h6 class="fw-semibold mb-0">Action</h6>
@@ -52,6 +57,13 @@
                       </td>
                       <td class="border-bottom-0">
                         <h6 class="fw-semibold mb-1">{$i.name}</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                      {if $i.active == 'no'}
+                        <span class="badge bg-danger rounded-3 fw-semibold">Rejected</span>
+                      {else}
+                        <span class="badge bg-success rounded-3 fw-semibold">Accepted</span>
+                      {/if}
                       </td>
                       <td class="border-bottom-0">
                         <a href="https://www.peeringdb.com/net/{$i.pdb_network_id}"><button type="button" class="btn btn-outline-info m-1">PeeringDB</button></a>
